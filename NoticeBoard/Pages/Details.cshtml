@@ -1,0 +1,69 @@
+﻿@page "{noteId:int}"
+@model NoticeBoard.Pages.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+@Model.temp
+<br>
+Author: @Model.note.Author
+<br>
+Message: @Model.note.Content
+<br>
+<button class="glyphicon glyphicon-thumbs-up"></button>
+
+
+<br>
+<br>
+<br>
+Comments:
+<br>
+<table class="table-striped">
+    @foreach (var comment in Model.note.Comments)
+    {
+
+        <tr>
+            <td>
+                @comment.Content
+            </td>
+        </tr>
+        <tr>
+            <td>
+                by <b>@comment.Author</b> at @comment.DnT
+
+            </td>
+        </tr>
+
+    }
+</table>
+
+<br>
+<br>
+Add Comment:
+<form method="post">
+
+
+
+    <input type="hidden" asp-for="noteId" />
+    <input type="hidden" asp-for="comment" />
+
+    <textarea asp-for="comment.Content" rows="3" cols="25" placeholder="enter your comment.." class="form-control">
+    
+    </textarea>
+    <br />
+    <input type="text" asp-for="comment.Author" placeholder="enter your name.." class="form-control" />
+    <br />
+
+    <button type="submit" class="btn btn-primary" asp-page="./Details">Save</button>
+</form>
+
+
+<a asp-page="./Index" class="btn btn-default">All Messages</a>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+}
