@@ -12,6 +12,7 @@ namespace NoticeBoard.Data
         Note getById(int id);
         Note Add(Note note);
         void AddComment(int noteId, Comment comment);
+        void AddLike(int noteId);
     }
 
     public class InMemoryNoteData: INoteData
@@ -47,6 +48,11 @@ namespace NoticeBoard.Data
         {
             getById(noteId).Comments.Add(comment);
             
+        }
+
+        public void AddLike(int noteId)
+        {
+            getById(noteId).Likes += 1;
         }
     }
 }

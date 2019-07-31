@@ -23,6 +23,7 @@ namespace NoticeBoard.Pages
 
         [BindProperty]
         public Comment comment { get; set; }
+        [TempData]
         public string Message { get; set; }
         [BindProperty]
         public Note note { get; set; }
@@ -51,11 +52,15 @@ namespace NoticeBoard.Pages
             System.Diagnostics.Debug.WriteLine("XXXXXXXXX");
             noteData.AddComment(noteId, comment);
             TempData["Message"] = "Comment successfully added.";
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details");
         }
-        public void OnLike(object sender, EventArgs e)
+        public IActionResult OnPostLike(int noteId)
         {
-            
+
+            System.Diagnostics.Debug.WriteLine("XXXXXXXXX");
+            noteData.AddLike(noteId);
+            return RedirectToPage("./Details");
         }
+
     }
 }

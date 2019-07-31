@@ -11,7 +11,13 @@ Author: @Model.note.Author
 <br>
 Message: @Model.note.Content
 <br>
-<button class="glyphicon glyphicon-thumbs-up"></button>
+@Model.note.Likes Likes
+<form method="post">
+    <input type="hidden" asp-for="noteId" />
+
+    <button type="submit" class="glyphicon glyphicon-thumbs-up" asp-page-handler="Like"></button>
+</form>
+
 
 
 <br>
@@ -58,6 +64,12 @@ Add Comment:
     <button type="submit" class="btn btn-primary" asp-page="./Details">Save</button>
 </form>
 
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+}
 
 <a asp-page="./Index" class="btn btn-default">All Messages</a>
 
